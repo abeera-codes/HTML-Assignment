@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flurell.pk | Jewelry for Everyday Glow</title>
+    <style>
+:root {
+    --hero: #fdeaf1;
+    --pink: #fcd5e5;
+    --mid: #f9a8c9;
+    --lav: #d4cdf5;
+    --lav-d: #9b94e0;
+    --white: #ffffff;
+    --title: #f0609d;
+    --text: #3b2a44;
+    --border: #f3d5e4;
+    --pad: max(22px, calc((100% - 1100px) / 2));
+    --flower: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='black'%3E%3Ccircle cx='50' cy='19' r='19'/%3E%3Ccircle cx='72' cy='28' r='19'/%3E%3Ccircle cx='81' cy='50' r='19'/%3E%3Ccircle cx='72' cy='72' r='19'/%3E%3Ccircle cx='50' cy='81' r='19'/%3E%3Ccircle cx='28' cy='72' r='19'/%3E%3Ccircle cx='19' cy='50' r='19'/%3E%3Ccircle cx='28' cy='28' r='19'/%3E%3Ccircle cx='50' cy='50' r='28'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+body.dark {
+    --hero: #2a1a2e;
+    --pink: #3a2240;
+    --mid: #7a3560;
+    --lav: #2c2a52;
+    --lav-d: #6f68c4;
+    --white: #1f1623;
+    --title: #ff8fc0;
+    --text: #f6e7f1;
+    --border: #4a2c52;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+body {
+    margin: 0;
+    font: 16px/1.6 "Nunito", Arial, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+}
+
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3, .logo { font-family: "Fredoka", "Nunito", sans-serif; font-weight: 600; }
+.script { font-family: "Caveat", cursive; font-weight: 700; }
+:focus-visible { outline: 2px solid var(--title); outline-offset: 3px; }
+
+/* Scalloped section edges: each section sets --prev (the colour above it) */
+.pink-band, .collections, .products, .lav-band, .order, .newsletter { position: relative; }
+.pink-band::before, .collections::before, .products::before, .lav-band::before, .order::before, .newsletter::before, .footer::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22px; pointer-events: none;
+    background: radial-gradient(circle at 20px 0, var(--prev) 20px, transparent 21px) 0 0 / 40px 22px repeat-x;
+}
+.pink-band { --prev: var(--hero); }
+.collections { --prev: var(--pink); }
+.products { --prev: var(--mid); }
+.lav-band { --prev: var(--white); }
+.order { --prev: var(--lav); }
+.newsletter { --prev: var(--hero); }
+.footer { --prev: var(--lav-d); position: relative; }
+
+/* Buttons */
+.btn {
+    display: inline-block; text-align: center; cursor: pointer;
+    padding: 13px 28px; border: 0; border-radius: 4px;
+    background: var(--title); color: #fff;
+    font: 700 11px "Nunito", Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase;
+    transition: 0.25s;
+}
+.btn:hover { background: var(--lav-d); transform: translateY(-2px); }
+.btn-sm { padding: 10px 18px; }
+.btn-lav { background: var(--lav-d); }
+.btn-lav:hover { background: var(--title); }
+
+/* Top bars */
+.announcement { background: var(--mid); color: #fff; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 2px; padding: 7px 12px; }
+
+.site-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 14px var(--pad); background: var(--white); }
+.header-side.right { justify-self: end; }
+.logo { display: inline-block; text-align: center; font-size: 40px; line-height: 1; color: var(--text); }
+.logo small { display: block; font: 700 10px "Nunito", Arial, sans-serif; letter-spacing: 4px; text-transform: uppercase; margin-top: 4px; }
+
+.nav {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 30px;
+    padding: 12px 20px; background: var(--lav);
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text);
+}
+.nav a:hover { color: var(--title); }
+.nav .nav-btn { background: var(--lav-d); color: #fff; padding: 6px 16px; border-radius: 4px; }
+.nav .nav-btn:hover { background: var(--title); color: #fff; }
+
+/* Hero */
+.hero {
+    display: grid; grid-template-columns: 1fr 1.3fr 1fr; align-items: center; gap: 20px;
+    padding: 70px var(--pad) 90px; background: var(--hero);
+    background-image: radial-gradient(circle at 8% 85%, var(--white) 0 46px, transparent 47px), radial-gradient(circle at 92% 18%, var(--white) 0 30px, transparent 31px);
+}
+.hero-text { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.script.small { font-size: 26px; margin: 0; color: var(--text); }
+.script.big { font-size: clamp(30px, 4vw, 44px); line-height: 1.1; margin: 10px 0 22px; color: var(--text); }
+h1 { font-size: clamp(44px, 6.4vw, 82px); line-height: 1; margin: 0 0 14px; color: var(--title); text-shadow: 0 3px 0 rgba(255, 255, 255, 0.75); }
+body.dark h1 { text-shadow: none; }
+
+.status { display: inline-block; padding: 5px 18px; border-radius: 999px; background: #fff; font-weight: 700; font-size: 14px; color: #555; margin: 0 0 4px; }
+.status.open { color: #1a7f37; }
+.status.closed { color: #c0261a; }
+
+.polaroid { background: #fff; padding: 10px 10px 36px; width: 100%; max-width: 250px; box-shadow: 0 12px 28px rgba(120, 60, 100, 0.18); }
+.polaroid.left { transform: rotate(-6deg); justify-self: end; }
+.polaroid.right { transform: rotate(6deg); justify-self: start; }
+.polaroid img { display: block; width: 100%; height: 270px; object-fit: cover; background: var(--pink); }
+.polaroid-art { display: grid; place-items: center; height: 270px; background: linear-gradient(160deg, #fcd5e5, #f9b8d2); }
+.polaroid-art svg { width: 190px; height: 190px; }
+
+/* Bands */
+.band { padding: 90px var(--pad) 80px; text-align: center; }
+.pink-band { background: var(--pink); }
+.lav-band { background: var(--lav); }
+#story { max-width: 640px; margin: 0 auto; }
+h2.plain { font: 700 24px "Nunito", Arial, sans-serif; color: var(--text); margin-bottom: 14px; }
+#story p { font-size: 15px; }
+#story .btn { margin-top: 8px; }
+
+.tab {
+    display: table; margin: 0 auto 40px; background: var(--white);
+    padding: 6px 28px; border-radius: 6px; color: var(--title);
+    font-size: clamp(26px, 4vw, 40px); line-height: 1.2;
+}
+.tab .script { color: var(--text); font-size: 1.15em; font-weight: 500; }
+
+/* Collections with flower filter buttons */
+.collections { background: var(--lav); padding: 90px var(--pad) 80px; text-align: center; }
+.script-title { margin: 0 0 40px; color: #fff; line-height: 1; }
+.script-title span { display: block; font: 700 clamp(34px, 5vw, 52px) "Caveat", cursive; color: var(--text); }
+.script-title { font-size: clamp(44px, 7vw, 76px); text-shadow: 0 3px 0 rgba(120, 100, 200, 0.35); }
+body.dark .script-title { text-shadow: none; }
+
+.flowers { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+.flower {
+    width: 200px; height: 200px; border: 0; cursor: pointer; padding: 0;
+    -webkit-mask: var(--flower) center / 100% 100% no-repeat; mask: var(--flower) center / 100% 100% no-repeat;
+    display: grid; place-content: center; text-align: center;
+    font-family: "Caveat", cursive; font-weight: 700; font-size: 36px; line-height: 1;
+    opacity: 0.8; transition: transform 0.3s, opacity 0.3s;
+}
+.flower small { display: block; font-size: 24px; font-weight: 500; }
+.flower:hover { transform: scale(1.06) rotate(-4deg); opacity: 1; }
+.flower.active { opacity: 1; transform: scale(1.12); }
+.f1 { background: #ffc4da; color: #b8326f; }
+.f2 { background: #ffd8cc; color: #b8502f; }
+.f3 { background: #ffa9c9; color: #8f1f55; }
+.f4 { background: #a9a2ee; color: #2f2780; }
+
+.marquee { background: var(--mid); color: #fff; overflow: hidden; white-space: nowrap; padding: 10px 0; font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+.marquee .track { display: inline-flex; animation: scroll 30s linear infinite; }
+.marquee span { padding-right: 18px; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* Products */
+.products { background: var(--white); padding: 90px var(--pad); }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 14px 14px 20px; text-align: center; transition: transform 0.3s, box-shadow 0.3s; }
+.card:hover { transform: translateY(-6px); box-shadow: 0 16px 34px rgba(240, 96, 157, 0.18); }
+.art { display: grid; place-items: center; height: 240px; background: var(--hero); border-radius: 10px; margin-bottom: 14px; }
+.art svg { width: 170px; height: 170px; transition: transform 0.4s; }
+.card:hover .art svg { transform: scale(1.08) rotate(-3deg); }
+.card h3 { font: 700 15px "Nunito", Arial, sans-serif; margin-bottom: 2px; }
+.desc { font-size: 13px; opacity: 0.8; margin-bottom: 4px; }
+.price { font-weight: 700; color: var(--title); margin-bottom: 14px; }
+
+/* Price table */
+.table-wrap { max-width: 800px; margin: 0 auto; overflow-x: auto; background: var(--white); border-radius: 14px; box-shadow: 0 10px 30px rgba(80, 70, 160, 0.15); }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 16px 24px; border-bottom: 1px solid var(--border); }
+th { background: var(--lav-d); color: #fff; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; }
+tbody tr:last-child td { border-bottom: 0; }
+td:last-child { font-weight: 700; color: var(--title); }
+
+/* Order */
+.order { display: grid; grid-template-columns: 0.9fr 1fr; gap: 64px; align-items: start; padding: 90px var(--pad); background: var(--hero); }
+.order .tab { margin: 0 0 20px; }
+.pick-list { list-style: none; margin: 22px 0 8px; padding: 0; background: var(--white); border-radius: 14px; overflow: hidden; }
+.pick-list li { padding: 14px 20px; border-bottom: 1px solid var(--border); }
+.pick-list li:last-child { border-bottom: 0; }
+.pick-list label { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+#total { font: 600 34px "Fredoka", sans-serif; color: var(--title); margin: 10px 0 0; }
+
+form { background: var(--white); padding: 36px; border-radius: 22px; box-shadow: 0 16px 40px rgba(240, 96, 157, 0.16); }
+form h3 { font-size: 30px; color: var(--title); margin-bottom: 20px; }
+label, legend { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+input[type="text"], input[type="email"], select, textarea {
+    width: 100%; padding: 12px 14px; margin-bottom: 18px;
+    border: 2px solid var(--border); border-radius: 10px; background: var(--hero); color: var(--text); font: inherit; font-size: 15px;
+}
+input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--title); }
+textarea { min-height: 88px; resize: vertical; margin-bottom: 6px; }
+fieldset { border: 2px solid var(--border); border-radius: 10px; padding: 8px 16px 12px; margin: 0 0 18px; }
+.choice { display: flex; align-items: center; gap: 10px; font-weight: 400; margin: 7px 0; cursor: pointer; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--title); width: 17px; height: 17px; margin: 0; }
+.hint { font-size: 13px; margin: -10px 0 16px; opacity: 0.85; }
+#charCount { margin-top: 0; }
+#charCount.low { color: #c0261a; font-weight: 700; opacity: 1; }
+#discountMsg.ok { color: #1a7f37; font-weight: 700; opacity: 1; }
+.submit-button { width: 100%; padding: 15px; }
+.form-message { margin: 16px 0 0; font-weight: 700; color: var(--title); }
+.center { text-align: center; margin: 10px 0 0; }
+
+/* Newsletter + footer */
+.newsletter { background: var(--lav-d); padding: 56px var(--pad) 46px; text-align: center; }
+.newsletter .script-title { margin-bottom: 20px; }
+.newsletter .script-title span { color: #fff; }
+.small-title { font-size: clamp(34px, 5vw, 54px); }
+.newsletter form { display: flex; gap: 10px; max-width: 520px; margin: 0 auto; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.newsletter input { margin: 0; flex: 1; background: #fff; color: #3b2a44; border-color: #fff; }
+
+.footer { background: var(--mid); text-align: center; padding: 56px var(--pad) 24px; color: #fff; }
+.footer .logo { color: #fff; font-size: clamp(48px, 9vw, 90px); }
+.deco { display: flex; justify-content: center; gap: 28px; margin-bottom: 18px; }
+.deco span { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: rgba(255, 255, 255, 0.35); font-size: 24px; }
+.links { display: flex; justify-content: center; gap: 24px; margin: 18px 0 8px; font-weight: 700; }
+.links a:hover { text-decoration: underline; }
+.copy { font-size: 12px; margin: 0; }
+
+/* Toast */
+.toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); z-index: 30;
+    background: var(--title); color: #fff; padding: 14px 24px; border-radius: 999px; font-size: 14px; font-weight: 700;
+    opacity: 0; visibility: hidden; transition: 0.3s; max-width: calc(100% - 30px);
+}
+.toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+
+/* Responsive */
+@media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr 1fr; padding: 50px 22px 70px; }
+    .hero-text { grid-column: 1 / -1; order: -1; margin-bottom: 20px; }
+    .polaroid.left, .polaroid.right { justify-self: center; max-width: 190px; }
+    .polaroid img, .polaroid-art { height: 200px; }
+    .grid { grid-template-columns: 1fr 1fr; }
+    .order { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 600px) {
+    .site-header { grid-template-columns: 1fr; justify-items: center; }
+    .header-side:first-child { display: none; }
+    .header-side.right { justify-self: center; }
+    .logo { font-size: 34px; }
+    .nav { gap: 6px 16px; }
+    .grid { grid-template-columns: 1fr; }
+    .flower { width: 150px; height: 150px; font-size: 28px; }
+    .flower small { font-size: 18px; }
+    .band, .collections, .products, .order { padding-left: 20px; padding-right: 20px; }
+    form { padding: 24px 18px; }
+    .newsletter form { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee .track { animation: none; }
+    * { transition: none !important; scroll-behavior: auto !important; }
+}
+
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+        <symbol id="i-necklace" viewBox="0 0 200 200">
+            <path d="M38 46C50 130 150 130 162 46" fill="none" stroke="#c8a27a" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>
+            <path d="M100 108l12 14-12 24-12-24z" fill="#c8a27a"/><circle cx="100" cy="124" r="3" fill="#fff"/>
+        </symbol>
+        <symbol id="i-bracelet" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="56" fill="none" stroke="#c8a27a" stroke-width="9" stroke-dasharray="0.1 15.5" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="45" fill="none" stroke="#8c6c5c" stroke-width="1" opacity=".5"/>
+            <circle cx="100" cy="44" r="8" fill="#c8a27a" stroke="#fff" stroke-width="2"/>
+        </symbol>
+        <symbol id="i-studs" viewBox="0 0 200 200">
+            <g fill="#c8a27a"><circle cx="66" cy="110" r="18"/><circle cx="134" cy="110" r="18"/></g>
+            <g fill="#fff" opacity=".85"><circle cx="66" cy="110" r="7"/><circle cx="134" cy="110" r="7"/></g>
+            <path d="M100 56v18M91 65h18" stroke="#8c6c5c" stroke-width="2" stroke-linecap="round"/>
+        </symbol>
+    </svg>
+
+    <div class="announcement">Little details. Big glow. ✿ Cash on Delivery available</div>
+
+    <header class="site-header">
+        <span class="header-side"></span>
+        <a href="#home" class="logo">Flurell<small>Jewelry Boutique</small></a>
+        <div class="header-side right">
+            <button type="button" id="themeToggle" class="btn btn-sm btn-lav">Toggle Light/Dark Mode</button>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <a href="#shop">Shop by collection</a>
+        <a href="#top-sellers">Top sellers</a>
+        <a href="#about">About us</a>
+        <a href="#prices">Prices</a>
+        <a href="#order" class="nav-btn">Order now</a>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="polaroid left"><img src="jewelry.jpg" alt="Jewelry collection by Flurell"></div>
+
+            <div class="hero-text">
+                <p class="script small">let's shop the</p>
+                <h1>Everyday Glow Collection</h1>
+                <p id="status" class="status">Checking opening hours...</p>
+                <p class="script big">Necklaces, bracelets &amp; more</p>
+                <a href="#top-sellers" class="btn">Shop now</a>
+            </div>
+
+            <div class="polaroid right"><div class="polaroid-art"><svg><use href="#i-necklace"/></svg></div></div>
+        </section>
+
+        <section class="band pink-band" id="about">
+            <article id="story">
+                <h2 class="plain">Cute jewelry for girls who love to shine</h2>
+                <p>At Flurell, we believe you don't need a special occasion to wear something beautiful.</p>
+                <p class="more">Our collection is about expressing your style, celebrating little moments, and finding pieces you'll love to wear again and again.</p>
+                <p class="more">Every piece is chosen to be light, easy to style and kind to your budget, so you can mix and stack them however you like.</p>
+                <button type="button" id="readMore" class="btn btn-sm">Read More</button>
+            </article>
+        </section>
+
+        <section class="collections" id="shop">
+            <h2 class="script-title"><span>shop by</span>collection</h2>
+            <div class="flowers">
+                <button type="button" class="filter-btn flower f1 active" data-filter="all"><span>all</span><small>pieces</small></button>
+                <button type="button" class="filter-btn flower f2" data-filter="Necklace"><span>necklaces</span></button>
+                <button type="button" class="filter-btn flower f3" data-filter="Bracelet"><span>bracelets</span></button>
+                <button type="button" class="filter-btn flower f4" data-filter="Earrings"><span>earrings</span></button>
+            </div>
+        </section>
+
+        <div class="marquee" aria-hidden="true">
+            <div class="track">
+                <span>Necklaces ✿ Bracelets ✿ Earrings ✿ Gift ideas ✿ Everyday essentials ✿ </span>
+                <span>Necklaces ✿ Bracelets ✿ Earrings ✿ Gift ideas ✿ Everyday essentials ✿ </span>
+            </div>
+        </div>
+
+        <section class="products" id="top-sellers">
+            <h2 class="tab"><span class="script">shop the</span> top sellers</h2>
+            <div class="grid">
+                <article class="card" data-category="Necklace">
+                    <div class="art"><svg><use href="#i-necklace"/></svg></div>
+                    <h3>Elegant Necklace</h3>
+                    <p class="desc">Simple. Timeless. Beautiful.</p>
+                    <p class="price">Rs. 799</p>
+                    <a href="#order" class="btn btn-sm product-link" data-product="Elegant Necklace">Choose this piece</a>
+                </article>
+                <article class="card" data-category="Bracelet">
+                    <div class="art"><svg><use href="#i-bracelet"/></svg></div>
+                    <h3>Classic Bracelet</h3>
+                    <p class="desc">A little shine for your wrist.</p>
+                    <p class="price">Rs. 599</p>
+                    <a href="#order" class="btn btn-sm product-link" data-product="Classic Bracelet">Choose this piece</a>
+                </article>
+                <article class="card" data-category="Earrings">
+                    <div class="art"><svg><use href="#i-studs"/></svg></div>
+                    <h3>Minimal Studs</h3>
+                    <p class="desc">Small details, lovely impact.</p>
+                    <p class="price">Rs. 399</p>
+                    <a href="#order" class="btn btn-sm product-link" data-product="Minimal Studs">Choose this piece</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="band lav-band" id="prices">
+            <h2 class="tab"><span class="script">our</span> price list</h2>
+            <div class="table-wrap">
+                <table id="menuTable">
+                    <thead><tr><th>Product</th><th>Category</th><th>Price</th></tr></thead>
+                    <tbody>
+                        <tr data-category="Necklace"><td>Elegant Necklace</td><td>Necklace</td><td>Rs. 799</td></tr>
+                        <tr data-category="Bracelet"><td>Classic Bracelet</td><td>Bracelet</td><td>Rs. 599</td></tr>
+                        <tr data-category="Earrings"><td>Minimal Studs</td><td>Earrings</td><td>Rs. 399</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="order" id="order">
+            <div class="order-intro">
+                <h2 class="tab"><span class="script">place an</span> order</h2>
+                <p>Tick the pieces you like and watch your total update.</p>
+
+                <ul class="pick-list">
+                    <li data-category="Necklace"><label><input type="checkbox" class="pick" data-price="799"> Elegant Necklace - Rs. 799</label></li>
+                    <li data-category="Bracelet"><label><input type="checkbox" class="pick" data-price="599"> Classic Bracelet - Rs. 599</label></li>
+                    <li data-category="Earrings"><label><input type="checkbox" class="pick" data-price="399"> Minimal Studs - Rs. 399</label></li>
+                </ul>
+                <p id="total">Total: Rs. 0</p>
+            </div>
+
+            <form id="orderForm">
+                <h3>Your details</h3>
+
+                <label for="username">Your name</label>
+                <input type="text" id="username" name="username" placeholder="Enter your name" required>
+
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+                <label for="product">Choose your jewelry</label>
+                <select id="product" name="product" required>
+                    <option value="">Select a product</option>
+                    <option value="Elegant Necklace">Elegant Necklace - Rs. 799</option>
+                    <option value="Classic Bracelet">Classic Bracelet - Rs. 599</option>
+                    <option value="Minimal Studs">Minimal Studs - Rs. 399</option>
+                </select>
+
+                <label for="birth-year">Birth year (student / senior discount)</label>
+                <input type="text" id="birth-year" name="birth-year" placeholder="e.g. 2002" inputmode="numeric">
+                <p id="discountMsg" class="hint"></p>
+
+                <fieldset>
+                    <legend>Payment preference</legend>
+                    <label class="choice"><input type="radio" name="payment" value="Cash on Delivery" required> Cash on Delivery</label>
+                    <label class="choice"><input type="radio" name="payment" value="Online Payment"> Online Payment</label>
+                </fieldset>
+
+                <label for="special-notes">Special request (optional)</label>
+                <textarea id="special-notes" name="special-notes" maxlength="100" placeholder="Gift note, packaging request..."></textarea>
+                <p id="charCount" class="hint">100 characters remaining</p>
+
+                <button type="submit" class="btn submit-button">Submit my order</button>
+                <p id="formMessage" class="form-message" role="status"></p>
+                <p class="hint center">Demo form for this website assignment.</p>
+            </form>
+        </section>
+
+        <section class="newsletter">
+            <h2 class="script-title small-title"><span>join our</span>newsletter</h2>
+            <form id="newsForm">
+                <input type="email" placeholder="Your email address" aria-label="Email for newsletter" required>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="deco" aria-hidden="true"><span>✿</span><span>♕</span><span>♡</span><span>✿</span></div>
+        <a href="#home" class="logo">Flurell<small>Jewelry Boutique</small></a>
+        <p class="links">
+            <a href="https://instagram.com/flurellpk" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://flurellpk.odoo.com" target="_blank" rel="noopener noreferrer">Online store</a>
+        </p>
+        <p class="copy">© 2026 Flurell.pk. Made with love ♡</p>
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script>
+/* Web Engineering - Assignment 3 (JavaScript)
+   All nine tasks are implemented below and numbered to match the brief. */
+
+var toast = document.getElementById("toast");
+
+function showMessage(message) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(function () {
+        toast.classList.remove("show");
+    }, 3500);
+}
+
+/* Clicking "Choose this piece" pre-selects the product in the form */
+document.querySelectorAll(".product-link").forEach(function (link) {
+    link.addEventListener("click", function () {
+        document.getElementById("product").value = link.getAttribute("data-product");
+    });
+});
+
+/* ---------- Task 5: Type conversion - age verification ---------- */
+var birthInput = document.getElementById("birth-year");
+var discountMsg = document.getElementById("discountMsg");
+
+function checkDiscount() {
+    var value = birthInput.value.trim();
+    discountMsg.className = "hint";
+
+    if (value === "") {
+        discountMsg.textContent = "";
+        return;
+    }
+
+    var birthYear = parseInt(value, 10);          // string -> integer
+    var thisYear = new Date().getFullYear();
+    var age = thisYear - birthYear;
+
+    if (isNaN(birthYear) || birthYear < 1900 || birthYear > thisYear) {
+        discountMsg.textContent = "Please enter a valid birth year, like 2002.";
+    } else if (age >= 18 && age <= 25) {
+        discountMsg.textContent = "Student discount confirmed (age " + age + ")!";
+        discountMsg.classList.add("ok");
+    } else if (age >= 60) {
+        discountMsg.textContent = "Senior discount confirmed (age " + age + ")!";
+        discountMsg.classList.add("ok");
+    } else {
+        discountMsg.textContent = "Age " + age + ": no student or senior discount applies.";
+    }
+}
+
+birthInput.addEventListener("input", checkDiscount);
+
+/* ---------- Task 1: Interactive form handling and validation ---------- */
+var orderForm = document.getElementById("orderForm");
+var formMessage = document.getElementById("formMessage");
+
+orderForm.addEventListener("submit", function (event) {
+    event.preventDefault();                       // stop the page refreshing
+
+    var username = document.getElementById("username").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var product = document.getElementById("product").value;
+    var payment = document.querySelector('input[name="payment"]:checked');
+
+    if (username === "" || email === "" || product === "" || payment === null) {
+        formMessage.textContent = "Please complete all required fields.";
+        return;
+    }
+
+    formMessage.textContent = "Thank you for visiting, " + username +
+        "! We will contact you at " + email + ".";
+    showMessage("Thank you, " + username + "! Your demo order is ready.");
+
+    orderForm.reset();
+    document.getElementById("charCount").textContent = "100 characters remaining";
+    document.getElementById("charCount").classList.remove("low");
+    discountMsg.textContent = "";
+});
+
+/* ---------- Task 2: Table row highlighting ---------- */
+document.querySelectorAll("#menuTable tbody tr").forEach(function (row) {
+    row.addEventListener("mouseover", function () {
+        row.style.backgroundColor = "#ffd3e3";
+    });
+    row.addEventListener("mouseout", function () {
+        row.style.backgroundColor = "";
+    });
+});
+
+/* ---------- Task 3: Theme / style switcher ---------- */
+document.getElementById("themeToggle").addEventListener("click", function () {
+    document.body.classList.toggle("dark");
+});
+
+/* ---------- Task 4: Interactive order total calculator ---------- */
+var picks = document.querySelectorAll(".pick");
+var totalText = document.getElementById("total");
+
+function updateTotal() {
+    var total = 0;
+    picks.forEach(function (box) {
+        if (box.checked) {
+            total += parseInt(box.getAttribute("data-price"), 10);
+        }
+    });
+    totalText.textContent = "Total: Rs. " + total;
+}
+
+picks.forEach(function (box) {
+    box.addEventListener("change", updateTotal);
+});
+
+/* ---------- Task 6: "Read More" toggle on the article ---------- */
+var extraParagraphs = document.querySelectorAll("#story .more");
+var readMoreBtn = document.getElementById("readMore");
+
+extraParagraphs.forEach(function (p) {
+    p.style.display = "none";                     // truncate to start
+});
+
+readMoreBtn.addEventListener("click", function () {
+    var hidden = extraParagraphs[0].style.display === "none";
+    extraParagraphs.forEach(function (p) {
+        p.style.display = hidden ? "block" : "none";
+    });
+    readMoreBtn.textContent = hidden ? "Read Less" : "Read More";
+});
+
+/* ---------- Task 7: Live category filter ---------- */
+var filterButtons = document.querySelectorAll(".filter-btn");
+var filterItems = document.querySelectorAll("[data-category]");
+
+filterButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+        var chosen = button.getAttribute("data-filter");
+
+        filterButtons.forEach(function (b) {
+            b.classList.remove("active");
+        });
+        button.classList.add("active");
+
+        filterItems.forEach(function (item) {
+            var show = chosen === "all" || item.getAttribute("data-category") === chosen;
+            item.style.display = show ? "" : "none";
+        });
+    });
+});
+
+/* ---------- Task 8: Dynamic opening status ---------- */
+var statusBanner = document.getElementById("status");
+var hour = new Date().getHours();
+
+if (hour >= 8 && hour < 22) {
+    statusBanner.textContent = "We are Open!";
+    statusBanner.classList.add("open");
+} else {
+    statusBanner.textContent = "Closed - Open at 8 AM";
+    statusBanner.classList.add("closed");
+}
+
+/* ---------- Task 9: Character counter for special request box ---------- */
+var notes = document.getElementById("special-notes");
+var charCount = document.getElementById("charCount");
+
+notes.addEventListener("input", function () {
+    var left = notes.maxLength - notes.value.length;
+    charCount.textContent = left + " characters remaining";
+    charCount.classList.toggle("low", left <= 20);
+});
+
+/* Newsletter box */
+document.getElementById("newsForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    showMessage("Thanks for subscribing!");
+    event.target.reset();
+});
+
+</script>
+</body>
+</html>
